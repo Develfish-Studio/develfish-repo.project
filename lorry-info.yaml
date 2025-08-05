@@ -1,0 +1,12 @@
+name: develfish-repo.project
+luau:
+  aliases:
+    root: .
+dependencies:
+  develfish-repo.utils:
+    uri: git@github.com:Develfish-Studio/develfish-repo-utils.git
+  develfish-repo.testing:
+    uri: git@github.com:Develfish-Studio/develfish-repo-testing.git
+actions:
+  test:
+    path: actions/test
