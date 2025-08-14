@@ -1,6 +1,12 @@
+--!strict
+
 local Meta = require('@develfish-repo.utils/lib/Meta')
 local Case = require('@develfish-repo.utils/lib/Case')
 local String = require('@develfish-repo.utils/lib/String')
+
+local Wrapper = {}
+
+export type Wrapper = typeof(Wrapper)
 
 export type Unwrappable<T> = {
   unwrap: (self: Unwrappable<T>) -> T
@@ -27,8 +33,6 @@ export type UnwrappedName = {
   pascal_name: string,
   kebab_name: string,
 }
-
-local Wrapper = {}
 
 function Wrapper:unwrap_array<T>(array: {Unwrappable<T>}): {T}
   local result = Meta:array {}
@@ -89,6 +93,32 @@ function Wrapper:array_or_nil<T>(array: {T}?): {T}?
   return nil
 end
 
-export type Wrapper = typeof(Wrapper)
+function Wrapper:map<T, R>(array: {T}, convert: (T) -> R): {R}
+  local result = Meta:array {}
+  for _, v in array do
+    result[#result + 1] = convert(v)
+  end
+  return result
+end
+
+function Wrapper:map_to_prop<T, R>(array: {T}, key: string): {R}
+  local result = Meta:array {}
+  for _, v in array do
+    if (typeof(v) == 'table') then
+      result[#result + 1] = v[key]
+    end
+  end
+  return result
+end
+
+function Wrapper:associate_by_prop<T, K, R>(array: {T}, key: string, convert: (T) -> R): {[K]: R}
+  local result = Meta:table {}
+  for _, v in array do
+    if typeof(v) == 'table' then
+      result[v[key]] = convert(v)
+    end
+  end
+  return result
+end
 
 return Wrapper

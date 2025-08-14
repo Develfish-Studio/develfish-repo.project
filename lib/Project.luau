@@ -1,24 +1,24 @@
-local Meta = require('@develfish-repo.utils/lib/Meta')
-local Wrapper = require('./Wrapper')
+--!strict
 
-export type Project = {
-  name: string?,
-  unwrap_project: (self: Project) -> UnwrappedProject,
-} & Wrapper.Unwrappable<Unwrapped>
+local Meta = require('@develfish-repo.utils/lib/Meta')
+
+local Project = {}
+
+export type Project = typeof(Project) & ProjectProps
+
+export type ProjectProps = {
+  name: string,
+}
 
 export type UnwrappedProject = {
-  name: string?,
+  name: string,
 }
 
 export type Unwrapped = {
   project: UnwrappedProject,
 }
 
-local Project = {
-  name = nil,
-}
-
-function Project:new(o: any): Project
+function Project:new(o: ProjectProps): Project
   return Meta:type(o, self, 'Project')
 end
 
