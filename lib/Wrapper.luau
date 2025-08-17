@@ -50,6 +50,13 @@ function Wrapper:unwrap_array_or_nil<T>(array: {Unwrappable<T>}): {T}?
   return #result > 0 and result or nil
 end
 
+function Wrapper:unwrap_or_nil<T>(unwrappable: Unwrappable<T>?): T?
+  if unwrappable == nil then
+    return nil
+  end
+  return unwrappable:unwrap()
+end
+
 function Wrapper:unwrap_path(path: string?): UnwrappedPath?
   if path ~= nil then
     local array = Meta:array {}

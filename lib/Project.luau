@@ -18,25 +18,31 @@ export type Unwrapped = {
   project: UnwrappedProject,
 }
 
+--- Creates an instance of Project
+--- @param o Project properties
 function Project:new(o: ProjectProps): Project
   return Meta:type(o, self, 'Project')
 end
 
+--- Creates an instance of Project
+--- @param name The name of the project in **snake_case**
 function Project:from(name: string): Project
   return Project:new({
     name = name,
   })
 end
 
-function Project.unwrap_project(self: Project): UnwrappedProject
+function Project:unwrap_project(): UnwrappedProject
+  local this = self::Project
   return {
-    name = self.name
+    name = this.name
   }
 end
 
-function Project.unwrap(self: Project): Unwrapped
+function Project:unwrap(): Unwrapped
+  local this = self::Project
   return {
-    project = self:unwrap_project(),
+    project = this:unwrap_project(),
   }
 end
 
