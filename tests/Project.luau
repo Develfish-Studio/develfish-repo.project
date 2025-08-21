@@ -1,4 +1,5 @@
 local describe = require("@develfish-repo.testing/lib/describe")
+local Meta = require("@develfish-repo.utils/lib/Meta")
 local Project = require("@root/lib/Project")
 
 describe("Project Record") (
@@ -7,7 +8,7 @@ describe("Project Record") (
       function (check)
         local project = Project:from("example_project")
 
-        check.eq(project.__type, "Project")
+        check.eq(Meta:typeof(project), "Project")
         check.eq(project.name, "example_project")
 
         local unwrapped = project:unwrap()
