@@ -34,6 +34,10 @@ export type UnwrappedName = {
   kebab_name: string,
 }
 
+export type UnwrappedMap<T> = {
+  [string]: T
+}
+
 function Wrapper:unwrap_array<T>(array: {Unwrappable<T>}): {T}
   local result = Meta:array {}
   for _, item in array do
