@@ -1,8 +1,8 @@
 --!strict
 
-local Meta = require('@develfish-repo.utils/lib/Meta')
-local Case = require('@develfish-repo.utils/lib/Case')
-local String = require('@develfish-repo.utils/lib/String')
+local Meta = require('@lorry.utils/lib/Meta')
+local Case = require('@lorry.utils/lib/Case')
+local String = require('@lorry.utils/lib/String')
 
 local Wrapper = {}
 
