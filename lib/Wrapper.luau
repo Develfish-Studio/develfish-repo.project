@@ -32,6 +32,7 @@ export type UnwrappedName = {
   camel_name: string,
   pascal_name: string,
   kebab_name: string,
+  title_name: string,
 }
 
 export type UnwrappedMap<T> = {
@@ -87,6 +88,7 @@ function Wrapper:unwrap_name(name: string): UnwrappedName
     camel_name = Case:snake_to_camel(name),
     pascal_name = Case:snake_to_pascal(name),
     kebab_name = Case:snake_to_kebab(name),
+    title_name = Case:snake_to_title(name),
   }
 end
 
