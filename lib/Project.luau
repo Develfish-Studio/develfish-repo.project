@@ -4,7 +4,7 @@ local Meta = require('@lorry.utils/lib/Meta')
 
 local Project = {}
 
-export type Project = typeof(Project) & ProjectProps
+export type Project = typeof(Project)
 
 export type ProjectProps = {
   name: string,
@@ -17,6 +17,16 @@ export type UnwrappedProject = {
 export type Unwrapped = {
   project: UnwrappedProject,
 }
+
+export type IHaveProject = {
+  get_project: (self: IHaveProject) -> Project,
+}
+
+export type IHaveName = {
+  get_name: (self: IHaveName) -> string,
+}
+
+export type ProjectImpl = Project & ProjectProps
 
 --- Creates an instance of Project
 --- @param o Project properties
@@ -33,7 +43,7 @@ function Project:from(name: string): Project
 end
 
 function Project:unwrap_project(): UnwrappedProject
-  local this = self::Project
+  local this = self::ProjectImpl
   return {
     name = this.name
   }

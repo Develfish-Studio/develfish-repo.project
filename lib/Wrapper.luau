@@ -115,10 +115,10 @@ function Wrapper:map<T, R>(array: {T}, convert: (T) -> R): {R}
 end
 
 function Wrapper:map_to_prop<T, R>(array: {T}, key: string): {R}
-  local result = Meta:array {}
+  local result: {R} = Meta:array {}
   for _, v in array do
     if (typeof(v) == 'table') then
-      result[#result + 1] = v[key]
+      result[#result + 1] = (v::{})[key]
     end
   end
   return result
@@ -128,7 +128,7 @@ function Wrapper:associate_by_prop<T, K, R>(array: {T}, key: string, convert: (T
   local result = Meta:table {}
   for _, v in array do
     if typeof(v) == 'table' then
-      result[v[key]] = convert(v)
+      result[(v::{})[key]] = convert(v)
     end
   end
   return result
