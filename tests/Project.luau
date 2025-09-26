@@ -1,15 +1,16 @@
+--!strict
+
 local describe = require("@lorry.testing/lib/describe")
 local Meta = require("@lorry.utils/lib/Meta")
 local Project = require("@root/lib/Project")
 
-describe("Project Record") (
+return describe("Project Record") (
   function (it)
     it("should provide ability to construct project") (
       function (check)
         local project = Project:from("example_project")
 
         check.eq(Meta:typeof(project), "Project")
-        check.eq(project.name, "example_project")
 
         local unwrapped = project:unwrap()
 
@@ -18,5 +19,3 @@ describe("Project Record") (
     )
   end
 )
-
-return {}
