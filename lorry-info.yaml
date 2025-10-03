@@ -7,6 +7,3 @@ dependencies:
     uri: git@github.com:Develfish-Studio/lorry.utils.git
   lorry.testing:
     uri: git@github.com:Develfish-Studio/lorry.testing.git
-actions:
-  test:
-    path: actions/test
